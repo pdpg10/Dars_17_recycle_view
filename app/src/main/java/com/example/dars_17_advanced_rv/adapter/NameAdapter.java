@@ -48,4 +48,10 @@ public class NameAdapter
     public int getItemCount() {
         return names.size();
     }
+
+    public void addItem() {
+        NameModel model = new NameModel("New Name " + System.currentTimeMillis() % 10);
+        names.add(0, model);
+        notifyItemInserted(0);
+    }
 }
