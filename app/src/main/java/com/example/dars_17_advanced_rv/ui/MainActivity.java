@@ -15,26 +15,17 @@ import com.example.dars_17_advanced_rv.model.NameModel;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity
+        extends AppCompatActivity
+        implements ItemClickListener {
     private RecyclerView rv;
-    private ItemClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setUpItemClickListener();
         setUpData();
-    }
-
-    private void setUpItemClickListener() {
-        listener = new ItemClickListener() {
-            @Override
-            public void onItemClick(NameModel model) {
-                openNextActivity(model);
-            }
-        };
     }
 
     private void openNextActivity(NameModel model) {
@@ -46,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpData() {
         rv = findViewById(R.id.rv);
         ArrayList<NameModel> list = genData();
-        NameAdapter adapter = new NameAdapter(this, list, listener);
+        NameAdapter adapter = new NameAdapter(this, list);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
     }
@@ -59,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
             list.add(model);
         }
         return list;
+    }
+
+    @Override
+    public void onItemClick(NameModel model) {
+        openNextActivity(model);
     }
 }

@@ -17,10 +17,9 @@ public class NameVH extends
     private ItemClickListener listener;
     private NameModel model;
 
-    public NameVH(@NonNull View view,
-                  ItemClickListener listener) {
+    public NameVH(@NonNull View view) {
         super(view);
-        this.listener = listener;
+        this.listener = (ItemClickListener) view.getContext();
         tv = view.findViewById(R.id.tv);
         view.setOnClickListener(this);
     }

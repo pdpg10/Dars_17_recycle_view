@@ -19,13 +19,10 @@ public class NameAdapter
         extends RecyclerView.Adapter<NameVH> {
     private ArrayList<NameModel> names;
     private LayoutInflater inflater;
-    private ItemClickListener listener;
 
     public NameAdapter(Context context,
-                       ArrayList<NameModel> names,
-                       ItemClickListener listener) {
+                       ArrayList<NameModel> names) {
         this.names = names;
-        this.listener = listener;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -34,7 +31,7 @@ public class NameAdapter
     public NameVH onCreateViewHolder(@NonNull ViewGroup parent,
                                      int viewType) {
         View view = inflater.inflate(R.layout.item_name, parent, false);
-        return new NameVH(view, listener);
+        return new NameVH(view);
     }
 
     @Override
