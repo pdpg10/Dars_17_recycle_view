@@ -1,7 +1,7 @@
 package com.example.dars_17_advanced_rv.common;
 
-public class Constants {
-    public static final String[] NAMES = new String[]{
+public interface Constants {
+    String[] NAMES = new String[]{
             "Имрон",
             "Мустафо",
             "Муҳаммад",
@@ -170,5 +170,6 @@ public class Constants {
             "Антиқа",
             "Наргиз"
     };
+    String KEY_NAME = "key_name";
 
 }
