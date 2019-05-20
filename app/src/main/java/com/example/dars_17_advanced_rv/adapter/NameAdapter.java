@@ -20,6 +20,8 @@ public class NameAdapter
     private ArrayList<NameModel> names;
     private LayoutInflater inflater;
     private ItemClickListener listener;
+    private int lastRemovedPosition;
+    private NameModel lastRemovedModel;
 
     public NameAdapter(Context context,
                        ArrayList<NameModel> names,
@@ -53,5 +55,17 @@ public class NameAdapter
         NameModel model = new NameModel("New Name " + System.currentTimeMillis() % 10);
         names.add(0, model);
         notifyItemInserted(0);
+    }
+
+    public void removeItemByPosition(int pos) {
+        this.lastRemovedPosition = pos;
+        lastRemovedModel = names.remove(pos);
+        notifyItemRemoved(pos);
+    }
+
+    public void undoLastRemovedItem() {
+
+        names.add(lastRemovedPosition,lastRemovedModel);
+        notifyItemInserted(lastRemovedPosition);
     }
 }
