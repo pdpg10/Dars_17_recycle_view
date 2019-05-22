@@ -1,6 +1,6 @@
 package com.example.dars_17_advanced_rv.model;
 
-public class NameModel extends BaseModel {
+public class NameModel {
     private String name;
 
     public NameModel(String name) {
