@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ArrayList<NameModel> genData() {
+
         ArrayList<NameModel> list = new ArrayList<>(Constants.NAMES.length);
         NameModel model;
         for (String name : Constants.NAMES) {
