@@ -6,18 +6,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.dars_17_advanced_rv.R;
-import com.example.dars_17_advanced_rv.model.NameModel;
+import com.example.dars_17_advanced_rv.model.SweetModel;
 
-public class NameVH extends BaseVH<NameModel> {
+public class SweetVH extends BaseVH<SweetModel> {
     private TextView tv;
 
-    public NameVH(@NonNull View view) {
+    public SweetVH(@NonNull View view) {
         super(view);
         tv = view.findViewById(R.id.tv);
     }
 
-    public void onBind(NameModel model) {
-        tv.setText(model.getName());
+    public void onBind(SweetModel model) {
+        tv.setText(model.getTitle());
     }
 }
 
