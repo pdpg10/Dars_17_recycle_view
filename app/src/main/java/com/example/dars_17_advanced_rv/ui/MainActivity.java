@@ -1,6 +1,7 @@
 package com.example.dars_17_advanced_rv.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUpSwipeListener() {
-        MySwipeCallback callback = new MySwipeCallback(adapter);
+        Drawable icon = getDrawable(R.drawable.ic_delete);
+        MySwipeCallback callback = new MySwipeCallback(adapter, icon);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(rv);
     }
