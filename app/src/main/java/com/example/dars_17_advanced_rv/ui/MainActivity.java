@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +14,7 @@ import com.example.dars_17_advanced_rv.adapter.NameAdapter;
 import com.example.dars_17_advanced_rv.common.Constants;
 import com.example.dars_17_advanced_rv.common.ItemClickListener;
 import com.example.dars_17_advanced_rv.model.NameModel;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.dars_17_advanced_rv.ui_util.MySwipeCallback;
 
 import java.util.ArrayList;
 
@@ -38,37 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUpSwipeListener() {
-        ItemTouchHelper.SimpleCallback callback =
-                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-                    @Override
-                    public boolean onMove(@NonNull RecyclerView recyclerView,
-                                          @NonNull RecyclerView.ViewHolder viewHolder,
-                                          @NonNull RecyclerView.ViewHolder target) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
-                                         int direction) {
-                        int pos = viewHolder.getAdapterPosition();
-                        adapter.removeItemByPosition(pos);
-                        showSnackBar();
-                    }
-                };
+        MySwipeCallback callback = new MySwipeCallback(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(rv);
     }
 
-    private void showSnackBar() {
-        Snackbar snackbar = Snackbar.make(rootView, "Undo item", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("undo", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.undoLastRemovedItem();
-            }
-        });
-        snackbar.show();
-    }
 
     private void setUpItemClickListener() {
         listener = new ItemClickListener() {
