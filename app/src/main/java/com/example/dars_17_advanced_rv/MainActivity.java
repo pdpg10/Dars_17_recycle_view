@@ -1,6 +1,9 @@
 package com.example.dars_17_advanced_rv;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,11 +17,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
+    private SharedPreferences preferences;
+    private LinearLayoutManager linearLayoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         setUpData();
     }
 
@@ -26,8 +33,16 @@ public class MainActivity extends AppCompatActivity {
         rv = findViewById(R.id.rv);
         ArrayList<NameModel> list = genData();
         NameAdapter adapter = new NameAdapter(this, list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
+
+        loadRvScrollState();
+    }
+
+    private void loadRvScrollState() {
+//        int pos = preferences.getInt(Constants.SCROLL_STATE, 0);
+//        rv.scrollToPosition(pos);
     }
 
     private ArrayList<NameModel> genData() {
@@ -39,5 +54,26 @@ public class MainActivity extends AppCompatActivity {
             list.add(model);
         }
         return list;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Parcelable state = linearLayoutManager.onSaveInstanceState();
+        outState.putParcelable("state", state);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Parcelable state = savedInstanceState.getParcelable("state");
+        linearLayoutManager.onRestoreInstanceState(state);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        int lastScrollPos = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
+//        preferences.edit().putInt(Constants.SCROLL_STATE, lastScrollPos).apply();
     }
 }

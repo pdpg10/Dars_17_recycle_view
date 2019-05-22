@@ -170,5 +170,5 @@ public class Constants {
             "Антиқа",
             "Наргиз"
     };
-
+    public final static String SCROLL_STATE = "SCROLL_STATE";
 }
