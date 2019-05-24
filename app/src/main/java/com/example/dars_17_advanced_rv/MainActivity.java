@@ -4,22 +4,20 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dars_17_advanced_rv.adapter.NameAdapter;
+import com.example.dars_17_advanced_rv.adapter.NewNameAdapter;
 import com.example.dars_17_advanced_rv.common.Constants;
 import com.example.dars_17_advanced_rv.model.NameModel;
 
 import java.util.ArrayList;
 
-import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     private SearchView searchView;
-    private NameAdapter adapter;
+    private NewNameAdapter adapter;
 
 
     @Override
@@ -48,15 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpData() {
         rv = findViewById(R.id.rv);
-        rv.setItemAnimator(new DefaultItemAnimator());
-
-        ScaleInTopAnimator scaleInTopAnimator = new ScaleInTopAnimator();
-        scaleInTopAnimator.setAddDuration(500);
-        scaleInTopAnimator.setRemoveDuration(500);
-        rv.setItemAnimator(scaleInTopAnimator);
 
         ArrayList<NameModel> list = genData();
-        adapter = new NameAdapter(this, list);
+        adapter = new NewNameAdapter(this, list);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
     }

@@ -16,7 +16,7 @@ public class NameCallBack extends DiffUtil.Callback {
         this.newList = newList;
     }
 
-    @Override
+       @Override
     public int getOldListSize() {
         return oldList.size();
     }
@@ -30,13 +30,13 @@ public class NameCallBack extends DiffUtil.Callback {
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
         NameModel oldModel = oldList.get(oldItemPosition);
         NameModel newModel = newList.get(newItemPosition);
-        return oldModel.getName().equals(newModel.getName());
+        return oldModel.equals(newModel);
     }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         NameModel oldModel = oldList.get(oldItemPosition);
         NameModel newModel = newList.get(newItemPosition);
-        return oldModel.equals(newModel);
+        return oldModel.getName().equals(newModel.getName());
     }
 }

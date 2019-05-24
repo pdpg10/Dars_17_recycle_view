@@ -6,11 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.dars_17_advanced_rv.R;
-import com.example.dars_17_advanced_rv.adapter.callback.NameCallBack;
+import com.example.dars_17_advanced_rv.adapter.callback.NameItemCallBack;
 import com.example.dars_17_advanced_rv.adapter.search.FilterImpl;
 import com.example.dars_17_advanced_rv.adapter.search.IFilter;
 import com.example.dars_17_advanced_rv.adapter.vh.NameVH;
@@ -18,20 +17,21 @@ import com.example.dars_17_advanced_rv.model.NameModel;
 
 import java.util.ArrayList;
 
-public class NameAdapter
-        extends RecyclerView.Adapter<NameVH> {
+public class NewNameAdapter
+        extends ListAdapter<NameModel, NameVH> {
     private ArrayList<NameModel> names;
     private LayoutInflater inflater;
     private IFilter filter;
 
 
-    public NameAdapter(Context context,
-                       ArrayList<NameModel> names) {
+    public NewNameAdapter(Context context,
+                          ArrayList<NameModel> names) {
+        super(new NameItemCallBack());
         this.names = names;
         this.inflater = LayoutInflater.from(context);
         filter = new FilterImpl(names);
+        submitList(names);
     }
-
 
     @NonNull
     @Override
@@ -41,6 +41,7 @@ public class NameAdapter
         return new NameVH(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull NameVH holder,
                                  int position) {
@@ -48,17 +49,10 @@ public class NameAdapter
         holder.onBind(model);
     }
 
-    @Override
-    public int getItemCount() {
-        return names.size();
-    }
-
     public void searchWith(String newText) {
         ArrayList<NameModel> newList = filter.search(newText);
-        NameCallBack callback = new NameCallBack(names, newList);
-        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
+        submitList(names);
         names.clear();
         names.addAll(newList);
-        result.dispatchUpdatesTo(this);
     }
 }
