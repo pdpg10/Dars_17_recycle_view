@@ -26,8 +26,12 @@ public class MainActivity extends AppCompatActivity {
         rv = findViewById(R.id.rv);
         ArrayList<NameModel> list = genData();
         NameAdapter adapter = new NameAdapter(this, list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
+
+//        SnapHelper snapHelper = new LinearSnapHelper();
+//        snapHelper.attachToRecyclerView(rv);
     }
 
     private ArrayList<NameModel> genData() {
