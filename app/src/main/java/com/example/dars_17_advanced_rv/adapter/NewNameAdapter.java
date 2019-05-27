@@ -1,6 +1,7 @@
 package com.example.dars_17_advanced_rv.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +52,6 @@ public class NewNameAdapter
 
     public void searchWith(String newText) {
         ArrayList<NameModel> newList = filter.search(newText);
-        submitList(names);
-        names.clear();
-        names.addAll(newList);
+        submitList(newList);
     }
 }

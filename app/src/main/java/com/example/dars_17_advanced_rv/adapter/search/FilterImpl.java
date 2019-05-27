@@ -10,12 +10,11 @@ public class FilterImpl implements IFilter {
 
     public FilterImpl(ArrayList<NameModel> tempList) {
         originList = (ArrayList<NameModel>) tempList.clone();
-        this.tempList = new ArrayList<>();
     }
 
     @Override
     public ArrayList<NameModel> search(String text) {
-        tempList.clear();
+        tempList = new ArrayList<>();
         if (text.isEmpty()) {
             tempList.addAll(originList);
         } else {
